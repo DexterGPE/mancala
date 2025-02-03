@@ -1,0 +1,40 @@
+plugins {
+    // Tell Gradle that we are builing java as a library (non-executable piece of code intended for use by other applications).
+    id 'java'
+    id 'java-library'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)  // Set Java version to 21
+    }
+}
+
+repositories {
+    // Specify the repository mirror that we want to download our dependencies from. Maven Central is configured by default when creating a new Gradle project.
+    mavenCentral()
+}
+
+dependencies {
+    // Download JUnit so that we can use it in our tests.
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    testRuntimeOnly "org.junit.platform:junit-platform-commons:1.8.2"
+
+    implementation 'org.mongodb:mongodb-driver-sync:4.7.1'
+    implementation project(':domain')
+}
+
+test {
+    // For running our tests, use the test runner provided by JUnit.
+    useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        java.srcDirs = ['src/main/java']
+    }
+    test {
+        java.srcDirs = ['src/test/java']
+    }
+}

@@ -1,0 +1,37 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./domain/Dockerfile
+    container_name: mancala-backend
+    depends_on:
+      - mongo
+    ports:
+      - "8080:8080"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mancala
+    restart: unless-stopped
+
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    container_name: mancala-frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:8.0.4
+    container_name: mancala-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
