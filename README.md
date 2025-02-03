@@ -12,11 +12,30 @@ The application is split into two main servers:
 
 ## Getting Started
 
-This project has a DockerFile which makes it easy to run, build and run the Dockerfile using:
+This project is made in docker containers which makes it portable and easy to run, build and run the project using the docker compose file:
 ```bash
 sudo docker compose build;
 sudo docker compose up
 ```
+
+Find the game in your browser at: http://localhost:5173/ (also printed in terminal after running).
+
+## Technologies Used
+
+- **Java**: The core game logic and API endpoints
+- **MongoDB**: Persisting game state
+- **React**: The user interface
+- **Gradle**: Managing the backend build and dependencies
+- **npm**: Managing the frontend build and dependencies
+
+## Folder Structure
+
+- `domain/` – Contains the backend code (Java, Gradle)
+- `client/` – Contains the frontend code (React, npm)
+- `persistence/` – Contains MongoDB data (if applicable)
+- `api/` – Contains the API layer which connects domain and persistence to Client
+
+## Alternative way to run each component manually
 
 Alternatively, you can manually start each part of the application:
 
@@ -45,18 +64,5 @@ npm run dev
 ```
 This will start the development server for the React app, and you should be able to access the application in your browser.
 
-## Technologies Used
 
-- **Java**: The core game logic and API endpoints
-- **MongoDB**: Persisting game state
-- **React**: The user interface
-- **Gradle**: Managing the backend build and dependencies
-- **npm**: Managing the frontend build and dependencies
-
-## Folder Structure
-
-- `domain/` – Contains the backend code (Java, Gradle)
-- `client/` – Contains the frontend code (React, npm)
-- `persistence/` – Contains MongoDB data (if applicable)
-- `api/` – Contains the API layer which connects domain and persistence to Client
 
